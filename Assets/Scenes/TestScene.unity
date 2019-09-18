@@ -307,8 +307,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
   camera1: {fileID: 0}
+  projectile: {fileID: 1297777231589936819, guid: 3b753f8086aca784cbf08c95a0734fcf,
+    type: 3}
   timeBetweenShots: 2
   lastShot: 0
+  reboundVelocity: 450
+  bulletVelocity: 75
 --- !u!54 &1359149709
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -534,7 +538,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06f4f8a17fbf3de45a1a752e06879823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  sensitivity: 3
 --- !u!81 &1915667071
 AudioListener:
   m_ObjectHideFlags: 0
