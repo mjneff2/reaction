@@ -7,9 +7,10 @@ public class ShootToMove : MonoBehaviour
     public Rigidbody rb;
     public Camera camera1;
     public GameObject projectile;
-    public float timeBetweenShots = 2.0f;
+    public float timeBetweenShots = 1.0f;
     public float lastShot = 0;
-    // Start is called before the first frame update
+    public float reboundVelocity = 450.0f;
+    public float bulletVelocity = 75.0f;
     public void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -21,7 +22,7 @@ public class ShootToMove : MonoBehaviour
         forward.Normalize();
         if (Input.GetButton("Fire1") && Time.time > lastShot + timeBetweenShots) {
             shoot();
-            rb.AddForce(forward * -300.0f);
+            rb.AddForce(forward * -reboundVelocity);
             lastShot = Time.time;
         }
     }
@@ -30,6 +31,6 @@ public class ShootToMove : MonoBehaviour
         var forward = camera1.transform.forward;
         forward.Normalize();
         GameObject bullet = Instantiate(projectile, transform.position + forward, Quaternion.identity) as GameObject;
-        bullet.GetComponent<Rigidbody>().AddForce(forward * 50.0f);
+        bullet.GetComponent<Rigidbody>().AddForce(forward * bulletVelocity);
     }
 }
