@@ -32,5 +32,6 @@ public class ShootToMove : MonoBehaviour
         forward.Normalize();
         GameObject bullet = Instantiate(projectile, transform.position + forward, Quaternion.identity) as GameObject;
         bullet.GetComponent<Rigidbody>().AddForce(forward * bulletVelocity);
+        Destroy(bullet, 10.0f);
     }
 }
