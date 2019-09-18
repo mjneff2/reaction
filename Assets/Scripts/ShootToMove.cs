@@ -6,6 +6,7 @@ public class ShootToMove : MonoBehaviour
 {
     public Rigidbody rb;
     public Camera camera1;
+    public GameObject projectile;
     public float timeBetweenShots = 2.0f;
     public float lastShot = 0;
     // Start is called before the first frame update
@@ -19,13 +20,16 @@ public class ShootToMove : MonoBehaviour
         var forward = camera1.transform.forward;
         forward.Normalize();
         if (Input.GetButton("Fire1") && Time.time > lastShot + timeBetweenShots) {
+            shoot();
             rb.AddForce(forward * -300.0f);
             lastShot = Time.time;
-            shoot();
         }
     }
 
     void shoot() {
-        //ToDo
+        var forward = camera1.transform.forward;
+        forward.Normalize();
+        GameObject bullet = Instantiate(projectile, transform.position + forward, Quaternion.identity) as GameObject;
+        bullet.GetComponent<Rigidbody>().AddForce(forward * 50.0f);
     }
 }
