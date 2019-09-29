@@ -30,6 +30,7 @@ public class ShootToMove : MonoBehaviour
     void shoot() {
         var forward = camera1.transform.forward;
         forward.Normalize();
+        forward = forward * GetComponent<SphereCollider>().radius;
         GameObject bullet = Instantiate(projectile, transform.position + forward, Quaternion.identity) as GameObject;
         bullet.GetComponent<Rigidbody>().AddForce(forward * bulletVelocity);
         Destroy(bullet, 10.0f);
