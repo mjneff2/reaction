@@ -6,6 +6,8 @@ public class MouseLook : MonoBehaviour
 {
     Vector2 rotation = new Vector2(0,0);
     public float sensitivity = 3;
+    public float verticalMin = -30f;
+    public float verticalMax = 30f;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +19,7 @@ public class MouseLook : MonoBehaviour
     {
         rotation.y += Input.GetAxis("Mouse X");
         rotation.x += -Input.GetAxis("Mouse Y");
-        rotation.x = Mathf.Clamp(rotation.x, -30f, 30f);
+        rotation.x = Mathf.Clamp(rotation.x, verticalMin, verticalMax);
         transform.eulerAngles = (Vector2)rotation * sensitivity;
     }
 }

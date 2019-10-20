@@ -13,6 +13,7 @@ public class Gun : MonoBehaviour
     public float weaponForce;
     public Vector3 bulletScale;
     public float bulletMass;
+    public float bulletLifetime = 20f;
 
     public void Start()
     {
@@ -25,7 +26,7 @@ public class Gun : MonoBehaviour
         var forward = camera1.transform.forward;
         forward.Normalize();
         if (Input.GetButton("Fire1") && Time.time > lastShot + timeBetweenShots) {
-            shoot(weaponForce, 20.0f);
+            shoot(weaponForce, bulletLifetime);
             rb.AddForce(forward * -weaponForce);
             lastShot = Time.time;
         }
