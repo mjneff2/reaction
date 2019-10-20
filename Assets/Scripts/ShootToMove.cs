@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class ShootToMove : MonoBehaviour
 {
-    public Rigidbody rb;
-    public Camera camera1;
+    private Rigidbody rb;
+    private Camera camera1;
     public GameObject projectile;
-    public float timeBetweenShots = 1.0f;
-    public float lastShot = 0;
-    public float reboundVelocity = 450.0f;
-    public float bulletVelocity = 75.0f;
+    public float timeBetweenShots;
+    private float lastShot = 0;
+    public float weaponForce;
     public void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -21,18 +20,18 @@ public class ShootToMove : MonoBehaviour
         var forward = camera1.transform.forward;
         forward.Normalize();
         if (Input.GetButton("Fire1") && Time.time > lastShot + timeBetweenShots) {
-            shoot();
-            rb.AddForce(forward * -reboundVelocity);
+            shoot(weaponForce, 10.0f);
+            rb.AddForce(forward * -weaponForce);
             lastShot = Time.time;
         }
     }
 
-    void shoot() {
+    public void shoot(float bulletForce, float bulletLifetime) {
         var forward = camera1.transform.forward;
         forward.Normalize();
         forward = forward * GetComponent<SphereCollider>().radius;
         GameObject bullet = Instantiate(projectile, transform.position + forward, Quaternion.identity) as GameObject;
-        bullet.GetComponent<Rigidbody>().AddForce(forward * bulletVelocity);
-        Destroy(bullet, 10.0f);
+        bullet.GetComponent<Rigidbody>().AddForce(forward * bulletForce);
+        Destroy(bullet, bulletLifetime);
     }
 }
