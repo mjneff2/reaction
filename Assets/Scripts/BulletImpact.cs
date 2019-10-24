@@ -17,11 +17,11 @@ public class BulletImpact : MonoBehaviour
     }
 
     void OnCollisionEnter(Collision col) {
-        if (col.gameObject.tag != "Player") {
-            Destroy(gameObject);
-        } else {
+        if (col.gameObject.tag == "Player") {
             PlayerHealth playerHealth = col.gameObject.GetComponent<PlayerHealth>();
             playerHealth.takeDamage(bulletDamage);
+            Destroy(gameObject);
+        } else {
             Destroy(gameObject);
         }
     }
