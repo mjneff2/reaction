@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DestroyOnImpact : MonoBehaviour
+public class BulletImpact : MonoBehaviour
 {
+    public float bulletDamage = 20f;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +20,9 @@ public class DestroyOnImpact : MonoBehaviour
     void OnCollisionEnter(Collision col) {
         if (col.gameObject.tag != "Player") {
             Destroy(gameObject);
-            Debug.Log("Bullet hit player");
+        } else {
+            PlayerHealth playerHealth = col.gameObject.GetComponent<PlayerHealth>();
+            playerHealth.takeDamage(bulletDamage);
         }
     }
 }

@@ -14,6 +14,7 @@ public class Gun : MonoBehaviour
     public Vector3 bulletScale;
     public float bulletMass;
     public float bulletLifetime = 20f;
+    public float bulletDamage = 20f;
     public string shootButton = "Fire1_P1";
 
     public void Start()
@@ -40,6 +41,7 @@ public class Gun : MonoBehaviour
         GameObject bullet = Instantiate(projectile, player.transform.position + forward * 1.5f, Quaternion.identity) as GameObject;
         bullet.GetComponent<Rigidbody>().mass = bulletMass;
         bullet.GetComponent<Rigidbody>().AddForce(forward * bulletForce);
+        bullet.GetComponent<BulletImpact>().bulletDamage = bulletDamage;
         bullet.transform.localScale = bulletScale;
         Destroy(bullet, bulletLifetime);
     }

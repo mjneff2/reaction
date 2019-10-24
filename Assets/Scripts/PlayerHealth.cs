@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int maxHealth = 100;
-    private int currentHealth = 0;
+    public float maxHealth = 100f;
+    public float currentHealth = 0f;
+    public Slider healthBar;
     private Vector3 originalPos;
     // Start is called before the first frame update
     void Start()
@@ -18,15 +20,27 @@ public class PlayerHealth : MonoBehaviour
     void Update()
     {
         if (currentHealth < 1) {
-            gameObject.transform.position = originalPos;
-            currentHealth = maxHealth;
+            die();
         }
+    }
+    
+    void die() {
+        gameObject.transform.position = originalPos;
+        currentHealth = maxHealth;
+        healthBar.value = currentHealth / maxHealth;
     }
 
-    void OnCollisionEnter(Collision col) {
+    public void takeDamage(float damage) {
+        currentHealth -= damage;
+        healthBar.value = currentHealth / maxHealth;
+    }
+
+    /*void OnCollisionEnter(Collision col) {
         if (col.gameObject.tag == "Bullet") {
             currentHealth -= 20;
+            healthBar.value = currentHealth / maxHealth;
             Destroy(col.gameObject);
         }
-    }
+    }*/
+
 }
