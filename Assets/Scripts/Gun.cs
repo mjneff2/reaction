@@ -14,6 +14,8 @@ public class Gun : MonoBehaviour
     public Vector3 bulletScale;
     public float bulletMass;
     public float bulletLifetime = 20f;
+    public float bulletDamage = 20f;
+    public string shootButton = "Fire1_P1";
 
     public void Start()
     {
@@ -25,7 +27,7 @@ public class Gun : MonoBehaviour
     public void FixedUpdate() {
         var forward = camera1.transform.forward;
         forward.Normalize();
-        if (Input.GetButton("Fire1") && Time.time > lastShot + timeBetweenShots) {
+        if ((Input.GetButton(shootButton) || Input.GetAxis(shootButton) > 0f) && Time.time > lastShot + timeBetweenShots) {
             shoot(weaponForce, bulletLifetime);
             rb.AddForce(forward * -weaponForce);
             lastShot = Time.time;
@@ -36,9 +38,10 @@ public class Gun : MonoBehaviour
         var forward = camera1.transform.forward;
         forward.Normalize();
         forward = forward * player.GetComponent<SphereCollider>().radius;
-        GameObject bullet = Instantiate(projectile, player.transform.position + forward, Quaternion.identity) as GameObject;
+        GameObject bullet = Instantiate(projectile, player.transform.position + forward * 1.5f, Quaternion.identity) as GameObject;
         bullet.GetComponent<Rigidbody>().mass = bulletMass;
         bullet.GetComponent<Rigidbody>().AddForce(forward * bulletForce);
+        bullet.GetComponent<BulletImpact>().bulletDamage = bulletDamage;
         bullet.transform.localScale = bulletScale;
         Destroy(bullet, bulletLifetime);
     }
