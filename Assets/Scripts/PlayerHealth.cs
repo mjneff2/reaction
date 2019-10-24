@@ -35,12 +35,4 @@ public class PlayerHealth : MonoBehaviour
         healthBar.value = currentHealth / maxHealth;
     }
 
-    /*void OnCollisionEnter(Collision col) {
-        if (col.gameObject.tag == "Bullet") {
-            currentHealth -= 20;
-            healthBar.value = currentHealth / maxHealth;
-            Destroy(col.gameObject);
-        }
-    }*/
-
 }
