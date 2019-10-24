@@ -8,7 +8,6 @@ public class BulletImpact : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -23,6 +22,7 @@ public class BulletImpact : MonoBehaviour
         } else {
             PlayerHealth playerHealth = col.gameObject.GetComponent<PlayerHealth>();
             playerHealth.takeDamage(bulletDamage);
+            Destroy(gameObject);
         }
     }
 }
