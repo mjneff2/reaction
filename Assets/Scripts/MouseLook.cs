@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class MouseLook : MonoBehaviour
 {
-    public string xAxis = "Mouse X";
-    public string yAxis = "Mouse Y";
+    public string xAxis;
+    public string yAxis;
 
     Vector2 rotation = new Vector2(0,0);
     public float sensitivity = 3;
@@ -14,6 +14,8 @@ public class MouseLook : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        xAxis = transform.root.gameObject.GetComponent<ControlStrings>().xAxis;
+        yAxis = transform.root.gameObject.GetComponent<ControlStrings>().yAxis;
         Cursor.lockState = CursorLockMode.Locked;   
     }
 

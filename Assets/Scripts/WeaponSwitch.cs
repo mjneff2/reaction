@@ -6,13 +6,14 @@ public class WeaponSwitch : MonoBehaviour
 {
 
     public int currentWeapon = 0;
-    public string switchAxis = "Switch_P1";
+    public string switchAxis;
     public float switchCooldown = 0.2f;
     private float lastSwitch = 0.0f;
 
     // Start is called before the first frame update
     void Start()
     {
+        switchAxis = transform.root.gameObject.GetComponent<ControlStrings>().switchAxis;
         selectWeapon();
     }
 

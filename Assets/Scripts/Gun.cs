@@ -15,10 +15,11 @@ public class Gun : MonoBehaviour
     public float bulletMass;
     public float bulletLifetime = 20f;
     public float bulletDamage = 20f;
-    public string shootButton = "Fire1_P1";
+    public string shootButton;
 
     public void Start()
     {
+        shootButton = transform.root.gameObject.GetComponent<ControlStrings>().shootButton;
         player = transform.root.gameObject;
         rb = player.GetComponent<Rigidbody>();
         camera1 = player.GetComponentInChildren<Camera>();
