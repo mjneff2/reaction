@@ -622,10 +622,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c8b6053d6f277f479cb454d164040c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  switchAxis: Switch_P1
-  xAxis: X_P1
-  yAxis: Y_P1
-  shootButton: Fire1_P1
+  switchAxis: Switch_P
+  xAxis: X_P
+  yAxis: Y_P
+  shootButton: Fire1_P
 --- !u!1 &586803363723805157
 GameObject:
   m_ObjectHideFlags: 0

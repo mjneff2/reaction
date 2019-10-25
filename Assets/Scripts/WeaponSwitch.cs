@@ -14,6 +14,7 @@ public class WeaponSwitch : MonoBehaviour
     void Start()
     {
         switchAxis = transform.root.gameObject.GetComponent<ControlStrings>().switchAxis;
+        Debug.Log(switchAxis);
         selectWeapon();
     }
 
