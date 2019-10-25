@@ -11,8 +11,9 @@ public class PlayerSpawner : MonoBehaviour
     void Awake()
     {
         playerList = new GameObject[playerCount];
+        GameObject spawners = transform.Find("Spawnpoints").gameObject;
         for (int k = 0; k < playerList.Length; k++) {
-            GameObject newPlayer = Instantiate(playerPrefab, transform.position + k * new Vector3(0, 5, 0), Quaternion.identity) as GameObject;
+            GameObject newPlayer = Instantiate(playerPrefab, spawners.transform.GetChild(k).position, Quaternion.identity) as GameObject;
             ControlStrings controlStrings = newPlayer.GetComponent<ControlStrings>();
             controlStrings.switchAxis += (k + 1);
             if (k > 0) {
@@ -26,6 +27,7 @@ public class PlayerSpawner : MonoBehaviour
             playerList[k] = newPlayer;
         }
         setViewports(playerList);
+        setColors(playerList);
         
     }
 
@@ -53,5 +55,22 @@ public class PlayerSpawner : MonoBehaviour
                     players[3].GetComponentInChildren<Camera>().rect = new Rect(0.5f, 0, 0.5f, 0.5f);
                     break;
             }
+    }
+
+    void setColors(GameObject[] players) {
+        for (int k = 0; k < players.Length; k++) {
+            Material mat = players[k].GetComponent<Renderer>().material;
+            switch (k) {
+                case 1:
+                    mat.SetColor("_Color", Color.red);
+                    break;
+                case 2:
+                    mat.SetColor("_Color", Color.green);
+                    break;
+                case 3:
+                    mat.SetColor("_Color", Color.yellow);
+                    break;
+            }
+        }
     }
 }
