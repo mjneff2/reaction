@@ -16,13 +16,8 @@ public class PlayerSpawner : MonoBehaviour
             GameObject newPlayer = Instantiate(playerPrefab, spawners.transform.GetChild(k).position, Quaternion.identity) as GameObject;
             ControlStrings controlStrings = newPlayer.GetComponent<ControlStrings>();
             controlStrings.switchAxis += (k + 1);
-            if (k > 0) {
-                controlStrings.xAxis += (k + 1);
-                controlStrings.yAxis += (k + 1);
-            } else {
-                controlStrings.xAxis = "Mouse X";
-                controlStrings.yAxis = "Mouse Y";
-            }
+            controlStrings.xAxis += (k + 1);
+            controlStrings.yAxis += (k + 1);
             controlStrings.shootButton += (k + 1);
             playerList[k] = newPlayer;
         }
