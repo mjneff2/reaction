@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PlayerSpawner : MonoBehaviour
 {
+    [Range(1,4)]
     public int playerCount;
+
     public GameObject[] playerList;
     public GameObject playerPrefab;
     // Start is called before the first frame update
@@ -14,16 +16,10 @@ public class PlayerSpawner : MonoBehaviour
         GameObject spawners = transform.Find("Spawnpoints").gameObject;
         for (int k = 0; k < playerList.Length; k++) {
             GameObject newPlayer = Instantiate(playerPrefab, spawners.transform.GetChild(k).position, Quaternion.identity) as GameObject;
-            ControlStrings controlStrings = newPlayer.GetComponent<ControlStrings>();
-            controlStrings.switchAxis += (k + 1);
-            controlStrings.xAxis += (k + 1);
-            controlStrings.yAxis += (k + 1);
-            controlStrings.shootButton += (k + 1);
             playerList[k] = newPlayer;
         }
         setViewports(playerList);
         setColors(playerList);
-        
     }
 
     // Update is called once per frame
