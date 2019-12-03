@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class Gun : MonoBehaviour
 {
+    private AudioSource audioData;
     private GameObject player;
     private Rigidbody rb;
     private Camera camera1;
@@ -20,6 +21,7 @@ public class Gun : MonoBehaviour
 
     public void Awake()
     {
+        audioData = GetComponent<AudioSource>();
         player = transform.root.gameObject;
         rb = player.GetComponent<Rigidbody>();
         camera1 = player.GetComponentInChildren<Camera>();
@@ -41,6 +43,7 @@ public class Gun : MonoBehaviour
             rb.AddForce(forward * -weaponForce);
             lastShot = Time.time;
             forward = forward * player.GetComponent<SphereCollider>().radius;
+            audioData.Play(0);
             GameObject bullet = Instantiate(projectile, player.transform.position + forward * 1.5f, Quaternion.identity) as GameObject;
             bullet.GetComponent<Rigidbody>().mass = bulletMass;
             bullet.GetComponent<Rigidbody>().AddForce(forward * bulletForce);

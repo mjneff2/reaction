@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerSpawner : MonoBehaviour
 {
-    [Range(1,4)]
+    [Range(2,4)]
     public int playerCount;
 
     public GameObject[] playerList;

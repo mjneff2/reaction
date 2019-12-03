@@ -7,7 +7,7 @@ public class MouseLook : MonoBehaviour
 {
     private PlayerInput inputData;
     private float mouseSensitivity = 30f;
-    private float controllerSensitivty = 300f;
+    private float controllerSensitivty = 150f;
     private float verticalMin = -90f;
     private float verticalMax = 90f;
 
