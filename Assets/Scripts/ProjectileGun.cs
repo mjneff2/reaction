@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Gun : MonoBehaviour
+public class ProjectileGun : MonoBehaviour
 {
     private AudioSource audioData;
     private GameObject player;
@@ -55,13 +55,11 @@ public class Gun : MonoBehaviour
 
     public void OnFireStart()
     {
-        Debug.Log("Fire!");
         buttonPressed = true;
     }
 
     public void OnFireEnd()
     {
-        Debug.Log("Release!");
         buttonPressed = false;
     }
 }
