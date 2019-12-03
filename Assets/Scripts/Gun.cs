@@ -16,12 +16,21 @@ public class Gun : MonoBehaviour
     public float bulletMass;
     public float bulletLifetime = 20f;
     public float bulletDamage = 20f;
+    private bool buttonPressed;
 
     public void Awake()
     {
         player = transform.root.gameObject;
         rb = player.GetComponent<Rigidbody>();
         camera1 = player.GetComponentInChildren<Camera>();
+    }
+
+    public void Update()
+    {
+        if (buttonPressed)
+        {
+            shoot(weaponForce, bulletLifetime);
+        }
     }
 
     public void shoot(float bulletForce, float bulletLifetime) {
@@ -41,9 +50,15 @@ public class Gun : MonoBehaviour
         }
     }
 
-    public void OnFire()
+    public void OnFireStart()
     {
         Debug.Log("Fire!");
-        shoot(weaponForce, bulletLifetime);
+        buttonPressed = true;
+    }
+
+    public void OnFireEnd()
+    {
+        Debug.Log("Release!");
+        buttonPressed = false;
     }
 }
