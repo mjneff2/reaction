@@ -35,6 +35,7 @@ public class MouseLook : MonoBehaviour
         Vector3 euler = transform.eulerAngles;
         euler.x = pitch;
         euler.y = yaw;
+        euler.z = 0;
         transform.eulerAngles = euler;
     }
 }
