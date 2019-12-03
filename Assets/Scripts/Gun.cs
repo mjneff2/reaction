@@ -16,24 +16,12 @@ public class Gun : MonoBehaviour
     public float bulletMass;
     public float bulletLifetime = 20f;
     public float bulletDamage = 20f;
-    public string shootButton;
 
     public void Awake()
     {
-        shootButton = transform.root.gameObject.GetComponent<ControlStrings>().shootButton;
         player = transform.root.gameObject;
         rb = player.GetComponent<Rigidbody>();
         camera1 = player.GetComponentInChildren<Camera>();
-    }
-
-    public void FixedUpdate() {
-        /*var forward = camera1.transform.forward;
-        forward.Normalize();
-        if ((Input.GetButton(shootButton) || Input.GetAxis(shootButton) > 0f) && Time.time > lastShot + timeBetweenShots) {
-            shoot(weaponForce, bulletLifetime);
-            rb.AddForce(forward * -weaponForce);
-            lastShot = Time.time;
-        }*/
     }
 
     public void shoot(float bulletForce, float bulletLifetime) {

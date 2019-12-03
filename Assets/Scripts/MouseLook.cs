@@ -5,37 +5,36 @@ using UnityEngine.InputSystem;
 
 public class MouseLook : MonoBehaviour
 {
-    //public string xAxis;
-    //public string yAxis;
+    private PlayerInput inputData;
+    private float mouseSensitivity = 30f;
+    private float controllerSensitivty = 300f;
+    private float verticalMin = -90f;
+    private float verticalMax = 90f;
 
-    Vector2 rotation = new Vector2(0,0);
-    public float sensitivity = .0001f;
-    public float verticalMin = -30f;
-    public float verticalMax = 30f;
+    private float pitch;
+    private float yaw;
+
     // Start is called before the first frame update
     void Start()
     {
-        /*xAxis = transform.root.gameObject.GetComponent<ControlStrings>().xAxis;
-        yAxis = transform.root.gameObject.GetComponent<ControlStrings>().yAxis;*/
+        inputData = GetComponentInParent<PlayerInput>();
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    // Update is called once per frame
-    /*void Update()
+    void Update()
     {
-        rotation.y += Input.GetAxis(xAxis);
-        rotation.x += -Input.GetAxis(yAxis);
-        rotation.x = Mathf.Clamp(rotation.x, verticalMin, verticalMax);
-        transform.eulerAngles = (Vector2)rotation * sensitivity;
-    }*/
-
-    public void OnLook(InputValue value)
-    {
-        var v = value.Get<Vector2>();
-        Debug.Log(v);
-        rotation.y += v.x;
-        rotation.x -= v.y;
-        rotation.x = Mathf.Clamp(rotation.x, verticalMin, verticalMax);
-        transform.eulerAngles = rotation * sensitivity;
+        float sensitivity = mouseSensitivity;
+        if (inputData.currentControlScheme == "Gamepad")
+        {
+            sensitivity = controllerSensitivty;
+        }
+        Vector2 look = inputData.actions["Look"].ReadValue<Vector2>();
+        pitch -= look.y * Time.deltaTime * sensitivity;
+        pitch = Mathf.Clamp(pitch, verticalMin, verticalMax);
+        yaw += look.x * Time.deltaTime * sensitivity;
+        Vector3 euler = transform.eulerAngles;
+        euler.x = pitch;
+        euler.y = yaw;
+        transform.eulerAngles = euler;
     }
 }
