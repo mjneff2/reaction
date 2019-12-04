@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class BulletImpact : MonoBehaviour
 {
-    public float bulletDamage = 20f;
+    public float bulletDamage;
+    public GameObject shooter;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +20,7 @@ public class BulletImpact : MonoBehaviour
     void OnCollisionEnter(Collision col) {
         if (col.gameObject.tag == "Player") {
             PlayerHealth playerHealth = col.gameObject.GetComponent<PlayerHealth>();
-            playerHealth.takeDamage(bulletDamage);
+            playerHealth.takeDamage(bulletDamage, shooter);
             Destroy(gameObject);
         } else {
             Destroy(gameObject);

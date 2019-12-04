@@ -48,6 +48,7 @@ public class ProjectileGun : MonoBehaviour
             bullet.GetComponent<Rigidbody>().mass = bulletMass;
             bullet.GetComponent<Rigidbody>().AddForce(forward * bulletForce);
             bullet.GetComponent<BulletImpact>().bulletDamage = bulletDamage;
+            bullet.GetComponent<BulletImpact>().shooter = transform.root.gameObject;
             bullet.transform.localScale = bulletScale;
             Destroy(bullet, bulletLifetime);
         }

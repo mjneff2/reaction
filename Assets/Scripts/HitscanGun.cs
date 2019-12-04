@@ -58,7 +58,7 @@ public class HitscanGun : MonoBehaviour
                 PlayerHealth playerHealth = hit.transform.GetComponent<PlayerHealth>();
                 if (playerHealth != null)
                 {
-                    playerHealth.takeDamage(bulletDamage);
+                    playerHealth.takeDamage(bulletDamage, transform.root.gameObject);
                 }
             }
             rb.AddForce(forward * -weaponForce);
