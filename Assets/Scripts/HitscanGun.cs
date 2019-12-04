@@ -10,12 +10,12 @@ public class HitscanGun : MonoBehaviour
     private Rigidbody rb;
     private Camera camera1;
     private LineRenderer laser;
+    public int barrelIndex;
     private float effectDisplayTime = 0.1f;
     private float lastShot = 0;
     public float timeBetweenShots;
     public float weaponForce;
-    public float bulletDamage = 20f;
-    public float bulletLifetime = 20f;
+    public float bulletDamage;
     private bool buttonPressed;
 
     public void Awake()
@@ -48,7 +48,7 @@ public class HitscanGun : MonoBehaviour
             forward.Normalize();
             lastShot = Time.time;
             audioData.Play(0);
-            laser.SetPosition(0, transform.position);
+            laser.SetPosition(0, transform.GetChild(barrelIndex).position);
             RaycastHit hit;
             if (Physics.Raycast(camera1.transform.position, forward, out hit))
             {
