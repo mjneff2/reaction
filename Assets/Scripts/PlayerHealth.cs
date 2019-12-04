@@ -8,19 +8,27 @@ public class PlayerHealth : MonoBehaviour
     public float maxHealth = 100f;
     public float currentHealth = 0f;
     public Slider healthBar;
+    public CanvasGroup deathTint;
+    public GameObject weapons;
     private GameObject playerSpawner;
     private int lastSpawn = -1;
+    private bool dead;
     // Start is called before the first frame update
     void Start()
     {
+        dead = false;
         currentHealth = maxHealth;
         playerSpawner = GameObject.Find("PlayerSpawner");
     }
     
     void die() {
-        gameObject.transform.position = playerSpawner.transform.GetChild(0).GetChild(getNewSpawn()).position;
-        currentHealth = maxHealth;
-        healthBar.value = currentHealth / maxHealth;
+        dead = true;
+        deathTint.alpha = 1;
+        weapons.SetActive(false);
+        //Disable visuals
+        GetComponent<MeshRenderer>().enabled = false;
+        GetComponent<SphereCollider>().enabled = false;
+        GetComponent<Rigidbody>().isKinematic = true;
     }
 
     public void takeDamage(float damage, GameObject shooter) {
@@ -30,6 +38,22 @@ public class PlayerHealth : MonoBehaviour
         {
             die();
             shooter.GetComponent<KillCounter>().killCount++;
+        }
+    }
+
+    public void OnRespawn() {
+        if (dead) {
+            //Disable children
+            weapons.SetActive(true);
+            //Disable visuals
+            GetComponent<MeshRenderer>().enabled = true;
+            GetComponent<SphereCollider>().enabled = true;
+            GetComponent<Rigidbody>().isKinematic = false;
+            dead = false;
+            deathTint.alpha = 0;
+            gameObject.transform.position = playerSpawner.transform.GetChild(0).GetChild(getNewSpawn()).position;
+            currentHealth = maxHealth;
+            healthBar.value = currentHealth / maxHealth;
         }
     }
 
