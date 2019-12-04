@@ -12,6 +12,7 @@ public class PlayerSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        playerCount = Parameters.playerCount;
         playerList = new GameObject[playerCount];
         GameObject spawners = transform.Find("Spawnpoints").gameObject;
         for (int k = 0; k < playerList.Length; k++) {

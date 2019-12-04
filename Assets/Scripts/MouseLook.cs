@@ -15,10 +15,11 @@ public class MouseLook : MonoBehaviour
     private float yaw;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         inputData = GetComponentInParent<PlayerInput>();
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     void Update()
