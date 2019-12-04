@@ -5,19 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-    public GameObject startButton;
-    public GameObject quitButton;
-    public GameObject player2;
-    public GameObject player3;
-    public GameObject player4;
+    public GameObject startText;
+    public GameObject playerSelect;
 
     public void ToPlayerSelect()
     {
-        startButton.SetActive(false);
-        quitButton.SetActive(false);
-        player2.SetActive(true);
-        player3.SetActive(true);
-        player4.SetActive(true);
+        startText.SetActive(false);
+        playerSelect.SetActive(true);
     }
 
     public void StartGame(int playerCount)
