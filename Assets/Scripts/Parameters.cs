@@ -4,5 +4,6 @@ using UnityEngine;
 
 public static class Parameters
 {
-    public static int playerCount;
+    //Default to 2 for testing in editor.
+    public static int playerCount = 2;
 }

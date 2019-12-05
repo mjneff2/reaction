@@ -8,6 +8,12 @@ public class UIManager : MonoBehaviour
     public GameObject startText;
     public GameObject playerSelect;
 
+    public void Start()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
     public void ToPlayerSelect()
     {
         startText.SetActive(false);
